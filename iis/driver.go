@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/nomad/plugins/drivers"
 	"github.com/hashicorp/nomad/plugins/shared/hclspec"
 	pstructs "github.com/hashicorp/nomad/plugins/shared/structs"
-	// useragent "github.com/sylabs/singularity/pkg/util/user-agent"
+	// useragent "github.com/sylabs/IIS/pkg/util/user-agent"
 )
 
 const (
@@ -25,8 +25,8 @@ const (
 	// and understands how to decode driver state
 	taskHandleVersion = 1
 
-	// singularityBIN is the singularity binary path.
-	// singularityBIN = "/usr/local/bin/singularity"
+	// IISBIN is the IIS binary path.
+	// IISBIN = "/usr/local/bin/IIS"
 )
 
 var (
@@ -63,8 +63,8 @@ var (
 	}
 )
 
-// Driver is a driver for running Singularity containers
-// https://github.com/sylabs/singularity
+// Driver is a driver for running IIS containers
+// https://github.com/sylabs/IIS
 type Driver struct {
 	// eventer is used to handle multiplexing of TaskEvents calls such that an
 	// event can be broadcast to all callers
@@ -93,7 +93,7 @@ type Driver struct {
 
 // Config is the driver configuration set by the SetConfig RPC call
 type Config struct {
-	// Enabled is set to true to enable the Singularity driver
+	// Enabled is set to true to enable the IIS driver
 	Enabled bool `codec:"enabled"`
 }
 
@@ -242,7 +242,7 @@ func (d *Driver) RecoverTask(handle *drivers.TaskHandle) error {
 	}
 
 	// se := prepareContainer(handle.Config, driverConfig)
-	// se.cachedir = d.config.SingularityCache
+	// se.cachedir = d.config.IISCache
 
 	// if err := se.startContainer(taskState.TaskConfig); err != nil {
 	// 	return fmt.Errorf("unable to start container: %v", err)
@@ -273,18 +273,18 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 		return nil, nil, fmt.Errorf("failed to decode driver config: %v", err)
 	}
 
-	d.logger.Info("starting singularity task", "driver_cfg", hclog.Fmt("%+v", driverConfig))
+	d.logger.Info("starting IIS task", "driver_cfg", hclog.Fmt("%+v", driverConfig))
 	handle := drivers.NewTaskHandle(taskHandleVersion)
 	handle.Config = cfg
 
 	// se := prepareContainer(cfg, driverConfig)
-	// se.cachedir = d.config.SingularityCache
+	// se.cachedir = d.config.IISCache
 	// se.logger = d.logger
 
 	// if err := se.startContainer(cfg); err != nil {
 	// 	return nil, nil, fmt.Errorf("unable to start container: %v", err)
 	// }
-	// d.logger.Info("singularity task deployed", "driver_cfg", hclog.Fmt("%+v", se.cmd.Args))
+	// d.logger.Info("IIS task deployed", "driver_cfg", hclog.Fmt("%+v", se.cmd.Args))
 
 	// h := &taskHandle{
 	// 	syexec:     se,
@@ -409,10 +409,10 @@ func (d *Driver) TaskEvents(ctx context.Context) (<-chan *drivers.TaskEvent, err
 
 // SignalTask send a specific signal to a taskID
 func (d *Driver) SignalTask(taskID string, signal string) error {
-	return fmt.Errorf("Singularity driver does not support signals")
+	return fmt.Errorf("IIS driver does not support signals")
 }
 
 // ExecTask calls a exec cmd over a running task
 func (d *Driver) ExecTask(taskID string, cmd []string, timeout time.Duration) (*drivers.ExecTaskResult, error) {
-	return nil, fmt.Errorf("Singularity driver does not support exec") //TODO
+	return nil, fmt.Errorf("IIS driver does not support exec") //TODO
 }
