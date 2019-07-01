@@ -5,7 +5,7 @@ import (
 
 	"github.com/hashicorp/nomad/plugins"
 
-	"github.com/eveld/nomad-iis-driver/iis"
+	"github.com/eveld/nomad-driver-iis/iis"
 )
 
 func main() {
