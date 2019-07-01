@@ -1,3 +1,3 @@
-module /home/erik/code/hashicorp/nomad-driver-iis
+module github.com/eveld/nomad-driver-iis
 
 go 1.12
